@@ -1,48 +1,79 @@
-
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Регистрация</title>
+    <title>Личный кабинет</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <div class="registration-card">
+    <!-- ========================= -->
+    <!-- ОКНО РЕГИСТРАЦИИ -->
+    <!-- ========================= -->
+
+    <div class="registration-card" id="registrationWindow">
 
         <h1>Регистрация</h1>
 
         <div class="form-group">
-            <label for="name">Имя *</label>
-            <input type="text" id="name" placeholder="Введите имя">
+            <label for="name">Имя</label>
+
+            <input
+                type="text"
+                id="name"
+                placeholder="Введите имя"
+            >
         </div>
 
         <div class="form-group">
-            <label for="phone">Телефон *</label>
-            <input type="tel" id="phone" placeholder="+7 (___) ___-__-__">
+            <label for="phone">Телефон</label>
+
+            <input
+                type="tel"
+                id="phone"
+                placeholder="+7 (___) ___-__-__"
+            >
         </div>
 
         <div class="form-group">
-            <label for="email">E-mail *</label>
-            <input type="email" id="email" placeholder="Введите e-mail">
+            <label for="email">E-mail</label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Введите e-mail"
+            >
         </div>
 
         <div class="form-group">
             <label for="club">Спортивный клуб</label>
-            <input type="text" id="club" placeholder="Введите название клуба">
+
+            <input
+                type="text"
+                id="club"
+                placeholder="Введите название клуба"
+            >
         </div>
 
         <div class="agreement">
-            <input type="checkbox" id="agreement">
+
+            <input
+                type="checkbox"
+                id="agreement"
+            >
 
             <label for="agreement">
                 Согласие с
-                <a href="#" id="offer">Правилами публичной оферты</a>
+                <a href="#" id="offer">
+                    Правилами публичной оферты
+                </a>
             </label>
+
         </div>
 
         <button id="register">
@@ -53,9 +84,79 @@
 
     </div>
 
+
+    <!-- ========================= -->
+    <!-- ЛИЧНЫЙ КАБИНЕТ -->
+    <!-- ========================= -->
+
+    <div class="account-card" id="accountWindow">
+
+        <h1>
+            ЛК Партнера:
+            <span id="accountName"></span>
+        </h1>
+
+        <div class="balance">
+            <p>Ваш баланс:</p>
+
+            <strong id="accountBalance">
+                0 ₽
+            </strong>
+        </div>
+
+        <div class="account-menu">
+
+            <a href="#" class="account-link" id="history">
+                История
+            </a>
+
+            <a href="#" class="account-link" id="referrals">
+                Мои рефералы
+            </a>
+
+            <a href="#" class="account-link" id="rewards">
+                Вознаграждение
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- ОКНО ВОЗНАГРАЖДЕНИЯ -->
+    <!-- ========================= -->
+
+    <div class="account-card" id="rewardWindow">
+
+        <h1>Вознаграждение</h1>
+
+        <div class="reward-block" id="registrationReward">
+
+            <p class="reward-description">
+                Награда за регистрацию
+            </p>
+
+            <strong class="reward-amount">
+                50 ₽
+            </strong>
+
+            <button id="claimReward">
+                Забрать
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- MAX Bridge -->
     <script src="https://st.max.ru/js/max-web-app.js"></script>
+
+    <!-- Наш JavaScript -->
     <script src="app.js"></script>
 
 </body>
+
 </html>
 
