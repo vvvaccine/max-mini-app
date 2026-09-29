@@ -9,7 +9,41 @@ const agreement = document.getElementById("agreement");
 const error = document.getElementById("error");
 
 
+// =========================
+// Данные пользователя MAX
+// =========================
+
+const user = window.WebApp.initDataUnsafe.user;
+
+if (user) {
+
+    // Заполняем имя из MAX
+    let fullName = user.first_name || "";
+
+    if (user.last_name) {
+        fullName += " " + user.last_name;
+    }
+
+    nameInput.value = fullName;
+}
+
+
+// =========================
+// Открытие публичной оферты
+// =========================
+
+document.getElementById("offer").addEventListener("click", (event) => {
+
+    event.preventDefault();
+
+    window.WebApp.openLink("https://images.meme-arsenal.com/197284209936b8ed6d194137534c2ffc.jpg");
+});
+
+
+// =========================
 // Маска телефона
+// =========================
+
 phoneInput.addEventListener("input", () => {
 
     let value = phoneInput.value.replace(/\D/g, "");
@@ -46,7 +80,19 @@ phoneInput.addEventListener("input", () => {
 });
 
 
+// =========================
+// Подсказки обязательных полей
+// =========================
+
+nameInput.title = "Заполните поле";
+phoneInput.title = "Заполните поле";
+emailInput.title = "Заполните поле";
+
+
+// =========================
 // Регистрация
+// =========================
+
 registerButton.addEventListener("click", () => {
 
     error.textContent = "";
@@ -54,8 +100,11 @@ registerButton.addEventListener("click", () => {
 
     // Проверяем имя
     if (nameInput.value.trim() === "") {
+
         error.textContent = "Введите имя";
+
         nameInput.focus();
+
         return;
     }
 
@@ -64,8 +113,11 @@ registerButton.addEventListener("click", () => {
     const phone = phoneInput.value.trim();
 
     if (phone.length !== 18) {
+
         error.textContent = "Введите корректный номер телефона";
+
         phoneInput.focus();
+
         return;
     }
 
@@ -74,32 +126,40 @@ registerButton.addEventListener("click", () => {
     const email = emailInput.value.trim();
 
     if (email === "") {
+
         error.textContent = "Введите e-mail";
+
         emailInput.focus();
+
         return;
     }
 
 
-    // Простая проверка e-mail
+    // Проверяем формат e-mail
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!emailPattern.test(email)) {
+
         error.textContent = "Введите корректный e-mail";
+
         emailInput.focus();
+
         return;
     }
 
 
     // Проверяем согласие
     if (!agreement.checked) {
-        error.textContent = "Необходимо согласиться с Правилами публичной оферты";
+
+        error.textContent =
+            "Необходимо согласиться с Правилами публичной оферты";
+
         return;
     }
 
 
-    // Если все проверки пройдены
+    // Все проверки пройдены
     error.textContent = "";
 
     alert("Регистрация успешно пройдена!");
 });
-
