@@ -1,4 +1,3 @@
-
 // =========================
 // ЭЛЕМЕНТЫ РЕГИСТРАЦИИ
 // =========================
@@ -57,10 +56,27 @@ const claimReward =
 
 
 // =========================
-// БАЛАНС ПОЛЬЗОВАТЕЛЯ
+// ЭЛЕМЕНТЫ ПРИГЛАШЕНИЯ
 // =========================
 
-// Пока баланс хранится только во время работы приложения
+const inviteWindow =
+    document.getElementById("inviteWindow");
+
+const inviteButton =
+    document.getElementById("inviteButton");
+
+
+// =========================
+// ФУТЕР
+// =========================
+
+const footer =
+    document.getElementById("footer");
+
+
+// =========================
+// БАЛАНС
+// =========================
 
 let balance = 0;
 
@@ -99,7 +115,7 @@ document.getElementById("offer")
 
         event.preventDefault();
 
-        window.WebApp.openLink("https://max.ru/");
+        window.WebApp.openLink("https://sportcrm.club/money-details.html");
 
     });
 
@@ -151,12 +167,24 @@ phoneInput.addEventListener("input", () => {
 
 
 // =========================
-// ПОДСКАЗКИ ОБЯЗАТЕЛЬНЫХ ПОЛЕЙ
+// ПОДСКАЗКИ
 // =========================
 
 nameInput.title = "Заполните поле";
 phoneInput.title = "Заполните поле";
 emailInput.title = "Заполните поле";
+
+
+// =========================
+// ОБНОВЛЕНИЕ БАЛАНСА
+// =========================
+
+function updateBalance() {
+
+    accountBalance.textContent =
+        balance + " ₽";
+
+}
 
 
 // =========================
@@ -242,23 +270,11 @@ registerButton.addEventListener("click", () => {
     // РЕГИСТРАЦИЯ УСПЕШНА
     // =========================
 
-    error.textContent = "";
-
-
-    // Берём имя, которое пользователь
-    // ввёл в форме
-
     const enteredName =
         nameInput.value.trim();
 
-
-    // Передаём имя в ЛК
-
     accountName.textContent =
         enteredName;
-
-
-    // Показываем текущий баланс
 
     updateBalance();
 
@@ -272,24 +288,17 @@ registerButton.addEventListener("click", () => {
         "block";
 
 
-    // На главном окне кнопка MAX «Назад»
-    // должна быть скрыта
+    // Показываем футер
+
+    footer.style.display =
+        "block";
+
+
+    // На ЛК кнопка MAX назад скрыта
 
     window.WebApp.BackButton.hide();
 
 });
-
-
-// =========================
-// ОБНОВЛЕНИЕ БАЛАНСА
-// =========================
-
-function updateBalance() {
-
-    accountBalance.textContent =
-        balance + " ₽";
-
-}
 
 
 // =========================
@@ -308,13 +317,19 @@ document.getElementById("rewards")
             "none";
 
 
-        // Показываем окно награды
+        // Показываем вознаграждение
 
         rewardWindow.style.display =
             "block";
 
 
-        // Показываем кнопку «Назад» MAX
+        // Футер остаётся видимым
+
+        footer.style.display =
+            "block";
+
+
+        // Показываем системную кнопку назад
 
         window.WebApp.BackButton.show();
 
@@ -327,9 +342,10 @@ document.getElementById("rewards")
 
 claimReward.addEventListener("click", () => {
 
-    // Добавляем 50 рублей к балансу
+    // Добавляем награду к балансу
 
-    balance += registrationRewardAmount;
+    balance +=
+        registrationRewardAmount;
 
 
     // Обновляем баланс
@@ -346,6 +362,37 @@ claimReward.addEventListener("click", () => {
 
 
 // =========================
+// ОТКРЫТИЕ ОКНА ПРИГЛАШЕНИЯ
+// =========================
+
+inviteButton.addEventListener("click", () => {
+
+    // Скрываем текущее окно
+
+    accountWindow.style.display =
+        "none";
+
+
+    // Показываем окно приглашения
+
+    inviteWindow.style.display =
+        "block";
+
+
+    // Футер остаётся видимым
+
+    footer.style.display =
+        "block";
+
+
+    // Показываем системную кнопку назад
+
+    window.WebApp.BackButton.show();
+
+});
+
+
+// =========================
 // КНОПКА «НАЗАД» MAX
 // =========================
 
@@ -355,28 +402,36 @@ const onBackButtonPress = () => {
 
     if (rewardWindow.style.display === "block") {
 
-        // Скрываем окно вознаграждения
-
         rewardWindow.style.display =
             "none";
-
-
-        // Возвращаем ЛК
 
         accountWindow.style.display =
             "block";
 
+    }
 
-        // На ЛК кнопка назад больше не нужна
 
-        window.WebApp.BackButton.hide();
+    // Если открыто окно приглашения
+
+    else if (inviteWindow.style.display === "block") {
+
+        inviteWindow.style.display =
+            "none";
+
+        accountWindow.style.display =
+            "block";
 
     }
+
+
+    // На ЛК кнопка назад должна быть скрыта
+
+    window.WebApp.BackButton.hide();
 
 };
 
 
-// Регистрируем обработчик кнопки MAX
+// Регистрируем обработчик
 
 window.WebApp.BackButton.onClick(
     onBackButtonPress
