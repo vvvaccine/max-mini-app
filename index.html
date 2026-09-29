@@ -1,19 +1,61 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test</title>
+
+    <title>Регистрация</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <h1>Test</h1>
+    <div class="registration-card">
 
-    <button id="start">CLICK HERE</button>
+        <h1>Регистрация</h1>
+
+        <div class="form-group">
+            <label for="name">Имя *</label>
+            <input type="text" id="name" placeholder="Введите имя">
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Телефон *</label>
+            <input type="tel" id="phone" placeholder="+7 (___) ___-__-__">
+        </div>
+
+        <div class="form-group">
+            <label for="email">E-mail *</label>
+            <input type="email" id="email" placeholder="Введите e-mail">
+        </div>
+
+        <div class="form-group">
+            <label for="club">Спортивный клуб</label>
+            <input type="text" id="club" placeholder="Введите название клуба">
+        </div>
+
+        <div class="agreement">
+            <input type="checkbox" id="agreement">
+
+            <label for="agreement">
+                Согласие с
+                <a href="#" id="offer">Правилами публичной оферты</a>
+            </label>
+        </div>
+
+        <button id="register">
+            Зарегистрироваться
+        </button>
+
+        <p id="error"></p>
+
+    </div>
 
     <script src="https://st.max.ru/js/max-web-app.js"></script>
     <script src="app.js"></script>
+
 </body>
 </html>
+
