@@ -65,6 +65,30 @@ const inviteWindow =
 const inviteButton =
     document.getElementById("inviteButton");
 
+const inviteClubName =
+    document.getElementById("inviteClubName");
+
+const inviteManagerName =
+    document.getElementById("inviteManagerName");
+
+const invitePhone =
+    document.getElementById("invitePhone");
+
+const inviteEmail =
+    document.getElementById("inviteEmail");
+
+const clubInfo =
+    document.getElementById("clubInfo");
+
+const managerNotice =
+    document.getElementById("managerNotice");
+
+const sendInvite =
+    document.getElementById("sendInvite");
+
+const inviteError =
+    document.getElementById("inviteError");
+
 
 // =========================
 // ФУТЕР
@@ -79,9 +103,6 @@ const footer =
 // =========================
 
 let balance = 0;
-
-
-// Размер награды за регистрацию
 
 const registrationRewardAmount = 50;
 
@@ -107,7 +128,7 @@ if (user) {
 
 
 // =========================
-// ОТКРЫТИЕ ПУБЛИЧНОЙ ОФЕРТЫ
+// ПУБЛИЧНАЯ ОФЕРТА
 // =========================
 
 document.getElementById("offer")
@@ -121,7 +142,7 @@ document.getElementById("offer")
 
 
 // =========================
-// МАСКА ТЕЛЕФОНА
+// МАСКА ТЕЛЕФОНА РЕГИСТРАЦИИ
 // =========================
 
 phoneInput.addEventListener("input", () => {
@@ -167,12 +188,61 @@ phoneInput.addEventListener("input", () => {
 
 
 // =========================
+// МАСКА ТЕЛЕФОНА ПРИГЛАШЕНИЯ
+// =========================
+
+invitePhone.addEventListener("input", () => {
+
+    let value =
+        invitePhone.value.replace(/\D/g, "");
+
+    if (value.startsWith("7")) {
+        value = value.substring(1);
+    }
+
+    value = value.substring(0, 10);
+
+    let result = "+7";
+
+    if (value.length > 0) {
+        result +=
+            " (" + value.substring(0, 3);
+    }
+
+    if (value.length >= 3) {
+        result += ")";
+    }
+
+    if (value.length > 3) {
+        result +=
+            " " + value.substring(3, 6);
+    }
+
+    if (value.length > 6) {
+        result +=
+            "-" + value.substring(6, 8);
+    }
+
+    if (value.length > 8) {
+        result +=
+            "-" + value.substring(8, 10);
+    }
+
+    invitePhone.value = result;
+
+});
+
+
+// =========================
 // ПОДСКАЗКИ
 // =========================
 
 nameInput.title = "Заполните поле";
 phoneInput.title = "Заполните поле";
 emailInput.title = "Заполните поле";
+inviteClubName.title = "Заполните поле";
+inviteManagerName.title = "Заполните поле";
+invitePhone.title = "Заполните поле";
 
 
 // =========================
@@ -196,8 +266,6 @@ registerButton.addEventListener("click", () => {
     error.textContent = "";
 
 
-    // Проверяем имя
-
     if (nameInput.value.trim() === "") {
 
         error.textContent =
@@ -208,8 +276,6 @@ registerButton.addEventListener("click", () => {
         return;
     }
 
-
-    // Проверяем телефон
 
     const phone =
         phoneInput.value.trim();
@@ -224,8 +290,6 @@ registerButton.addEventListener("click", () => {
         return;
     }
 
-
-    // Проверяем e-mail
 
     const email =
         emailInput.value.trim();
@@ -255,8 +319,6 @@ registerButton.addEventListener("click", () => {
     }
 
 
-    // Проверяем согласие
-
     if (!agreement.checked) {
 
         error.textContent =
@@ -266,20 +328,12 @@ registerButton.addEventListener("click", () => {
     }
 
 
-    // =========================
-    // РЕГИСТРАЦИЯ УСПЕШНА
-    // =========================
-
-    const enteredName =
-        nameInput.value.trim();
+    // Регистрация успешна
 
     accountName.textContent =
-        enteredName;
+        nameInput.value.trim();
 
     updateBalance();
-
-
-    // Показываем ЛК
 
     registrationWindow.style.display =
         "none";
@@ -287,14 +341,8 @@ registerButton.addEventListener("click", () => {
     accountWindow.style.display =
         "block";
 
-
-    // Показываем футер
-
     footer.style.display =
         "block";
-
-
-    // На ЛК кнопка MAX назад скрыта
 
     window.WebApp.BackButton.hide();
 
@@ -302,7 +350,7 @@ registerButton.addEventListener("click", () => {
 
 
 // =========================
-// ОТКРЫТИЕ ВОЗНАГРАЖДЕНИЯ
+// ВОЗНАГРАЖДЕНИЕ
 // =========================
 
 document.getElementById("rewards")
@@ -310,50 +358,26 @@ document.getElementById("rewards")
 
         event.preventDefault();
 
-
-        // Скрываем ЛК
-
         accountWindow.style.display =
             "none";
-
-
-        // Показываем вознаграждение
 
         rewardWindow.style.display =
             "block";
 
-
-        // Футер остаётся видимым
-
         footer.style.display =
             "block";
-
-
-        // Показываем системную кнопку назад
 
         window.WebApp.BackButton.show();
 
     });
 
 
-// =========================
-// ПОЛУЧЕНИЕ НАГРАДЫ
-// =========================
-
 claimReward.addEventListener("click", () => {
-
-    // Добавляем награду к балансу
 
     balance +=
         registrationRewardAmount;
 
-
-    // Обновляем баланс
-
     updateBalance();
-
-
-    // Убираем блок награды
 
     registrationReward.style.display =
         "none";
@@ -362,27 +386,27 @@ claimReward.addEventListener("click", () => {
 
 
 // =========================
-// ОТКРЫТИЕ ОКНА ПРИГЛАШЕНИЯ
+// ОКНО ПРИГЛАШЕНИЯ
 // =========================
 
 inviteButton.addEventListener("click", () => {
 
-    // Скрываем текущее окно
+    // Скрываем ЛК
 
     accountWindow.style.display =
         "none";
 
 
-    // Показываем окно приглашения
+    // Показываем форму приглашения
 
     inviteWindow.style.display =
         "block";
 
 
-    // Футер остаётся видимым
+    // На окне приглашения футер скрываем
 
     footer.style.display =
-        "block";
+        "none";
 
 
     // Показываем системную кнопку назад
@@ -393,12 +417,156 @@ inviteButton.addEventListener("click", () => {
 
 
 // =========================
+// ОТПРАВКА ПРИГЛАШЕНИЯ
+// =========================
+
+sendInvite.addEventListener("click", () => {
+
+    inviteError.textContent = "";
+
+
+    // =========================
+    // НАЗВАНИЕ КЛУБА
+    // =========================
+
+    if (inviteClubName.value.trim() === "") {
+
+        inviteError.textContent =
+            "Введите название клуба";
+
+        inviteClubName.focus();
+
+        return;
+    }
+
+
+    // =========================
+    // ФИО РУКОВОДИТЕЛЯ
+    // =========================
+
+    if (inviteManagerName.value.trim() === "") {
+
+        inviteError.textContent =
+            "Введите ФИО руководителя";
+
+        inviteManagerName.focus();
+
+        return;
+    }
+
+
+    // =========================
+    // ТЕЛЕФОН
+    // =========================
+
+    const managerPhone =
+        invitePhone.value.trim();
+
+    if (managerPhone.length !== 18) {
+
+        inviteError.textContent =
+            "Введите корректный номер телефона";
+
+        invitePhone.focus();
+
+        return;
+    }
+
+
+    // =========================
+    // E-MAIL
+    // =========================
+
+    const managerEmail =
+        inviteEmail.value.trim();
+
+    // E-mail необязательный.
+    // Проверяем формат только если он заполнен.
+
+    if (managerEmail !== "") {
+
+        const emailPattern =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailPattern.test(managerEmail)) {
+
+            inviteError.textContent =
+                "Введите корректный e-mail";
+
+            inviteEmail.focus();
+
+            return;
+        }
+
+    }
+
+
+    // =========================
+    // ЧЕКБОКС
+    // =========================
+
+    if (!managerNotice.checked) {
+
+        inviteError.textContent =
+            "Необходимо подтвердить информацию о звонке Менеджера SportCRM";
+
+        return;
+    }
+
+
+    // =========================
+    // ПРИГЛАШЕНИЕ УСПЕШНО
+    // =========================
+
+    inviteError.textContent = "";
+
+
+    // Здесь позже будет отправка данных
+    // на сервер.
+
+
+    // Очищаем форму
+
+    inviteClubName.value = "";
+    inviteManagerName.value = "";
+    invitePhone.value = "";
+    inviteEmail.value = "";
+    clubInfo.value = "";
+    managerNotice.checked = false;
+
+
+    // Закрываем окно приглашения
+
+    inviteWindow.style.display =
+        "none";
+
+
+    // Возвращаем ЛК
+
+    accountWindow.style.display =
+        "block";
+
+
+    // Возвращаем футер
+
+    footer.style.display =
+        "block";
+
+
+    // На главном окне кнопка назад скрыта
+
+    window.WebApp.BackButton.hide();
+
+});
+
+
+// =========================
 // КНОПКА «НАЗАД» MAX
 // =========================
 
 const onBackButtonPress = () => {
 
-    // Если открыто окно вознаграждения
+    // Возврат из вознаграждения
 
     if (rewardWindow.style.display === "block") {
 
@@ -408,10 +576,13 @@ const onBackButtonPress = () => {
         accountWindow.style.display =
             "block";
 
+        footer.style.display =
+            "block";
+
     }
 
 
-    // Если открыто окно приглашения
+    // Возврат из приглашения
 
     else if (inviteWindow.style.display === "block") {
 
@@ -421,17 +592,18 @@ const onBackButtonPress = () => {
         accountWindow.style.display =
             "block";
 
+        footer.style.display =
+            "block";
+
     }
 
 
-    // На ЛК кнопка назад должна быть скрыта
+    // На ЛК кнопка назад скрыта
 
     window.WebApp.BackButton.hide();
 
 };
 
-
-// Регистрируем обработчик
 
 window.WebApp.BackButton.onClick(
     onBackButtonPress

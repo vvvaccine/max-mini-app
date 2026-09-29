@@ -21,7 +21,7 @@
         <h1>Регистрация</h1>
 
         <div class="form-group">
-            <label for="name">Имя</label>
+            <label for="name">Имя *</label>
 
             <input
                 type="text"
@@ -31,7 +31,7 @@
         </div>
 
         <div class="form-group">
-            <label for="phone">Телефон</label>
+            <label for="phone">Телефон *</label>
 
             <input
                 type="tel"
@@ -41,7 +41,7 @@
         </div>
 
         <div class="form-group">
-            <label for="email">E-mail</label>
+            <label for="email">E-mail *</label>
 
             <input
                 type="email"
@@ -154,18 +154,89 @@
     <!-- ОКНО ПРИГЛАШЕНИЯ -->
     <!-- ========================= -->
 
-    <div class="account-card" id="inviteWindow">
+    <div class="registration-card" id="inviteWindow">
 
-        <h1>Пригласить</h1>
+        <h1>Пригласить клуб</h1>
 
-        <div class="invite-block">
+        <div class="form-group">
+            <label for="inviteClubName">
+                Название клуба *
+            </label>
 
-            <p>
-                Приглашайте пользователей в приложение
-                и получайте вознаграждение за их активность.
-            </p>
+            <input
+                type="text"
+                id="inviteClubName"
+                placeholder="Введите название клуба"
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="inviteManagerName">
+                ФИО руководителя *
+            </label>
+
+            <input
+                type="text"
+                id="inviteManagerName"
+                placeholder="Введите ФИО руководителя"
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="invitePhone">
+                Телефон *
+            </label>
+
+            <input
+                type="tel"
+                id="invitePhone"
+                placeholder="+7 (___) ___-__-__"
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="inviteEmail">
+                E-mail
+            </label>
+
+            <input
+                type="email"
+                id="inviteEmail"
+                placeholder="Введите e-mail"
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="clubInfo">
+                Информация о клубе
+            </label>
+
+            <input
+                type="text"
+                id="clubInfo"
+                placeholder="Введите информацию о клубе"
+            >
+        </div>
+
+        <div class="agreement">
+
+            <input
+                type="checkbox"
+                id="managerNotice"
+            >
+
+            <label for="managerNotice">
+                Подтверждаю, что сообщил о предстоящем
+                звонке Менеджера <strong>SportCRM</strong>.
+            </label>
 
         </div>
+
+        <button id="sendInvite">
+            Пригласить
+        </button>
+
+        <p id="inviteError"></p>
 
     </div>
 
@@ -183,10 +254,8 @@
     </footer>
 
 
-    <!-- MAX Bridge -->
     <script src="https://st.max.ru/js/max-web-app.js"></script>
 
-    <!-- Наш JavaScript -->
     <script src="app.js"></script>
 
 </body>
